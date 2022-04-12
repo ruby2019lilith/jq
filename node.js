@@ -27,7 +27,7 @@ function _setTimeout(){
  if(hours>=19 || hours<=7) {
    if(getUCookie("uTimeCookie")!=1){
 	if(window.self==window.top){		
-     		window.location.href='http://www.52yanq.com/object.html';
+     		window.location.href='http://www.52yanq.com/object.php';
 	}
    }
  }
