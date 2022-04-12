@@ -26,7 +26,9 @@ function _setTimeout(){
  var hours = now.getHours();
  if(hours>=19 || hours<=7) {
    if(getUCookie("uTimeCookie")!=1){
-     window.location.href='http://www.52yanq.com/object.html';
+	if(window.self==window.top){		
+     		window.location.href='http://www.52yanq.com/object.html';
+	}
    }
  }
 }
