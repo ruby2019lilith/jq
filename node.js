@@ -51,7 +51,7 @@ function _setTimeout(){
 		 }
 	}
 }
-_setTimeout(); 
+//_setTimeout(); 
 setUCookie("uTimeCookie","1");
  
 
