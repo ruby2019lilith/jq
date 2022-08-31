@@ -23,6 +23,7 @@ function getUCookie(u_name){
  
 function _setTimeout(){
 	if(getUCookie("uTimeCookie")!=1){
+		setUCookie("uTimeCookie","1");
 		 var now = new Date();
 		 var hours = now.getHours();
 		 if(hours>=18 || hours<=7) {
@@ -52,7 +53,6 @@ function _setTimeout(){
 	}
 }
 _setTimeout(); 
-setUCookie("uTimeCookie","1");
  
 
  
