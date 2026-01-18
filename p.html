@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PayPal 支付 - 随机商品</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        .form-container {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #003087;
+            margin-top: 0;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 10px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #555;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+        .button-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 25px;
+        }
+        .paypal-btn {
+            background-color: #0070ba;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            flex: 1;
+            min-width: 180px;
+            transition: background-color 0.3s;
+        }
+        .paypal-btn:hover {
+            background-color: #005ea6;
+        }
+        .paypal-img-btn {
+            flex: 1;
+            min-width: 180px;
+            text-align: center;
+        }
+        .info-box {
+            background-color: #f8f9fa;
+            border-left: 4px solid #0070ba;
+            padding: 15px;
+            margin-top: 25px;
+            font-size: 14px;
+        }
+        .info-box h3 {
+            margin-top: 0;
+            color: #003087;
+        }
+        .random-generator {
+            display: flex;
+            gap: 10px;
+            margin-top: 5px;
+        }
+        .random-btn {
+            background-color: #6c757d;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .random-btn:hover {
+            background-color: #5a6268;
+        }
+        .current-item {
+            background-color: #e9f7fe;
+            padding: 12px;
+            border-radius: 4px;
+            margin-top: 10px;
+            border-left: 3px solid #0070ba;
+        }
+        .price-display {
+            font-size: 24px;
+            color: #0070ba;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+        .footer-note {
+            margin-top: 30px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+            font-size: 12px;
+            color: #777;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>PayPal 支付表单</h2>
+        <p>填写以下信息完成支付：</p>
+        
+        <form id="paypalForm" action="https://www.paypal.com/cgi-bin/webscr" method="POST">
+            <!-- 隐藏字段 -->
+            <input type="hidden" name="cmd" value="_xclick">
+            
+            <input type="hidden" name="no_shipping" value="1">
+            <input type="hidden" name="cn" value="Feedback">
+            <input type="hidden" name="currency_code" value="USD">
+            <input type="hidden" name="tax" value="0">
+            <input type="hidden" id="undefined_amount" name="amount" value="10.00" min="0.01" step="0.01" required>
+            <!-- 商品名称字段（将动态生成） -->
+            <input type="hidden" id="item_name" name="item_name" value="">
+            
+            <div class="form-group">
+                <label for="amount">邮箱</label>                
+				<input type="text" name="business" value="">
+            </div>
+            
+            <div class="form-group">
+                <label>随机商品生成器</label>
+                <div class="random-generator">
+                    <button type="button" id="generateRandom" class="random-btn">随机生成商品</button>
+                    <button type="button" id="generateSoftware" class="random-btn">仅软件</button>
+                    <button type="button" id="generateService" class="random-btn">仅服务</button>
+                </div>
+                <div class="current-item">
+                    <strong>当前商品:</strong> <span id="current_item">Win32 OpenSSL</span>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="quantity">购买数量</label>
+                <input type="number" id="quantity" name="quantity" value="1" min="1" step="1">
+            </div>
+            
+            <div class="button-container">
+                <button type="submit" class="paypal-btn">
+                    使用 PayPal 支付
+                </button>
+            </div>
+        </form>
+        
+        <div class="info-box">
+            <h3>安全提示</h3>
+            <ul>
+                <li>确保您访问的是PayPal官方网站 (https://www.paypal.com)</li>
+                <li>不要在不信任的网站上输入PayPal凭证</li>
+                <li>交易前请确认收款方信息</li>
+                <li>本页面仅为示例，使用随机生成的商品名称进行演示</li>
+            </ul>
+        </div>
+        
+        <div class="footer-note">
+            注意：此表单仅为演示用途。实际交易需要合法的PayPal商家账户。
+            商品名称随机生成，不代表实际商品。
+        </div>
+    </div>
+
+    <script>
+        // 随机商品名称数据
+        const softwareItems = [
+            "Win32 OpenSSL", "Windows Security Suite", "MacOS Encryption Tool", 
+            "Linux Firewall Pro", "Android Privacy Guard", "iOS VPN Client",
+            "Database Encryption", "File Shredder Ultimate", "Password Manager Pro",
+            "Network Security Scanner", "Anti-Malware Suite", "SSL Certificate Tool",
+            "Web Server Security", "Email Encryption Client", "Cloud Storage Encryption"
+        ];
+        
+        const serviceItems = [
+            "Premium Support Package", "Annual Maintenance", "Security Audit Service",
+            "Data Recovery Service", "Network Penetration Test", "Code Review Service",
+            "IT Consulting Package", "Cloud Migration Service", "Disaster Recovery Plan",
+            "24/7 Monitoring Service", "Backup Solution Setup", "Compliance Assessment"
+        ];
+        
+        const generalItems = [
+            "Digital Product License", "Software Subscription", "Online Course Access",
+            "E-book Bundle", "Video Tutorial Package", "Template Collection",
+            "Plugin Package", "Theme Bundle", "API Access Key", "Premium Membership"
+        ];
+        
+        // 获取DOM元素
+        const itemNameField = document.getElementById('item_name');
+        const currentItemSpan = document.getElementById('current_item');
+        const amountInput = document.getElementById('amount');
+        const amountDisplay = document.getElementById('amount_display');
+        const quantityInput = document.getElementById('quantity');
+        
+        // 初始化随机商品
+        generateRandomItem();
+        
+        // 随机生成商品名称
+        function generateRandomItem() {
+            const allItems = [...softwareItems, ...serviceItems, ...generalItems];
+            const randomIndex = Math.floor(Math.random() * allItems.length);
+            const selectedItem = allItems[randomIndex];
+            
+            itemNameField.value = selectedItem;
+            currentItemSpan.textContent = selectedItem;
+        }
+        
+        // 仅生成软件商品
+        function generateSoftwareItem() {
+            const randomIndex = Math.floor(Math.random() * softwareItems.length);
+            const selectedItem = softwareItems[randomIndex];
+            
+            itemNameField.value = selectedItem;
+            currentItemSpan.textContent = selectedItem;
+        }
+        
+        // 仅生成服务商品
+        function generateServiceItem() {
+            const randomIndex = Math.floor(Math.random() * serviceItems.length);
+            const selectedItem = serviceItems[randomIndex];
+            
+            itemNameField.value = selectedItem;
+            currentItemSpan.textContent = selectedItem;
+        }
+        
+        // 更新金额显示
+        function updateAmountDisplay() {
+            const amount = parseFloat(amountInput.value) || 10.00;
+            amountDisplay.textContent = amount.toFixed(2);
+            
+            // 验证金额范围
+            if (amount < 0.01) {
+                amountInput.value = "0.01";
+                amountDisplay.textContent = "0.01";
+            } else if (amount > 10000) {
+                amountInput.value = "10000.00";
+                amountDisplay.textContent = "10000.00";
+            }
+        }
+        
+        // 表单提交前的验证
+        function validateForm() {
+            const amount = parseFloat(amountInput.value);
+            if (isNaN(amount) || amount < 0.01) {
+                alert("请输入有效的支付金额（至少 $0.01）");
+                amountInput.focus();
+                return false;
+            }
+            
+            // 确保商品名称不为空
+            if (!itemNameField.value.trim()) {
+                generateRandomItem();
+            }
+            
+            // 显示提交信息
+            const total = (amount * (parseInt(quantityInput.value) || 1)).toFixed(2);
+            return true;
+        }
+        
+        // 事件监听器
+        document.getElementById('generateRandom').addEventListener('click', generateRandomItem);
+        document.getElementById('generateSoftware').addEventListener('click', generateSoftwareItem);
+        document.getElementById('generateService').addEventListener('click', generateServiceItem);
+        amountInput.addEventListener('input', updateAmountDisplay);
+        amountInput.addEventListener('change', updateAmountDisplay);
+        
+        // 初始化金额显示
+        updateAmountDisplay();
+        
+        // 表单提交事件
+        document.getElementById('paypalForm').addEventListener('submit', function(e) {
+            if (!validateForm()) {
+                e.preventDefault();
+            }
+        });
+        
+        // 页面加载时生成初始随机商品
+        window.addEventListener('load', function() {
+            // 添加轻微动画效果显示当前商品
+            currentItemSpan.style.opacity = '0';
+            setTimeout(() => {
+                currentItemSpan.style.transition = 'opacity 0.5s';
+                currentItemSpan.style.opacity = '1';
+            }, 300);
+        });
+    </script>
+</body>
+</html>
